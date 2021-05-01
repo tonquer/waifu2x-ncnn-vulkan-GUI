@@ -1,6 +1,7 @@
 # waifu2x-ncnn-vulkan-GUI
 这是使用[waifu2x-ncnn-vulkan-python](https://github.com/tonquer/waifu2x-ncnn-vulkan-python)和qt实现的demo，支持png和jpg图片转换
 支持放大倍数，去噪等级，模型选择
+# 界面
 ![image](https://user-images.githubusercontent.com/22116659/116770684-0add3a00-aa78-11eb-90b7-c34547adfb51.png)
 # Windows
   1. 下载最新的版本 https://github.com/tonquer/waifu2x-ncnn-vulkan-GUI/releases
