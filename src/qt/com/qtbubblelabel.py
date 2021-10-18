@@ -1,6 +1,6 @@
-from PySide2.QtCore import Qt, QPoint, QPropertyAnimation, QEasingCurve, QParallelAnimationGroup, QRectF, Property
-from PySide2.QtGui import QPen, QPainterPath, QPainter, QColor
-from PySide2.QtWidgets import QWidget, QVBoxLayout, QLabel, QApplication
+from PySide6.QtCore import Qt, QPoint, QPropertyAnimation, QEasingCurve, QParallelAnimationGroup, QRectF, Property
+from PySide6.QtGui import QPen, QPainterPath, QPainter, QColor
+from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QApplication
 
 
 class QtBubbleLabel(QWidget):
@@ -18,7 +18,6 @@ class QtBubbleLabel(QWidget):
         layout.setContentsMargins(8, 8, 8, 16)
         self.label = QLabel(self)
         layout.addWidget(self.label)
-        self._desktop = QApplication.instance().desktop()
         self.animationGroup = QParallelAnimationGroup(self)
 
     def setText(self, text):

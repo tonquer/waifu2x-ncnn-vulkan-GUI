@@ -1,6 +1,6 @@
-from PySide2 import QtWidgets
-from PySide2.QtCore import QSettings, Qt, QSize
-from PySide2.QtWidgets import QFileDialog
+from PySide6 import QtWidgets
+from PySide6.QtCore import QSettings, Qt, QSize
+from PySide6.QtWidgets import QFileDialog
 
 from conf import config
 from src.qt.com.qtbubblelabel import QtBubbleLabel

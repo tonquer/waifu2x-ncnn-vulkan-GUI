@@ -1,11 +1,11 @@
 import os
 import time
 
-from PySide2 import QtWidgets, QtGui, QtCore
-from PySide2.QtCore import Qt, QRectF, QPointF, QSizeF, QEvent, QTextCodec, QRegExp
-from PySide2.QtGui import QColor, QPainter, QPixmap, QImage, QValidator, QRegExpValidator, QDoubleValidator, \
+from PySide6 import QtWidgets, QtGui, QtCore
+from PySide6.QtCore import Qt, QRectF, QPointF, QSizeF, QEvent
+from PySide6.QtGui import QColor, QPainter, QPixmap, QDoubleValidator, \
     QIntValidator
-from PySide2.QtWidgets import QFrame, QGraphicsPixmapItem, QGraphicsScene, QApplication, QFileDialog
+from PySide6.QtWidgets import QFrame, QGraphicsPixmapItem, QGraphicsScene, QApplication, QFileDialog
 
 from conf import config
 from src.qt.com.qtbubblelabel import QtBubbleLabel
@@ -42,7 +42,7 @@ class QtImg(QtWidgets.QWidget, Ui_Img):
         self.graphicsView.setCursor(Qt.OpenHandCursor)
         self.graphicsView.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
         self.graphicsView.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.graphicsView.setRenderHints(QPainter.Antialiasing | QPainter.HighQualityAntialiasing |
+        self.graphicsView.setRenderHints(QPainter.Antialiasing |
                                          QPainter.SmoothPixmapTransform)
         self.graphicsView.setCacheMode(self.graphicsView.CacheBackground)
         self.graphicsView.setViewportUpdateMode(self.graphicsView.SmartViewportUpdate)
@@ -219,7 +219,7 @@ class QtImg(QtWidgets.QWidget, Ui_Img):
             return False
         if not config.CanWaifu2x:
             return False
-        import waifu2x
+        import waifu2x_vulkan
         self.SetStatus(False)
         self.index = self.comboBox.currentIndex()
         index = self.comboBox.currentIndex()
@@ -244,7 +244,7 @@ class QtImg(QtWidgets.QWidget, Ui_Img):
             modelInsence += "_TTA"
 
         model = {
-            "model":  getattr(waifu2x, modelInsence),
+            "model":  getattr(waifu2x_vulkan, modelInsence),
         }
         if self.scaleRadio.isChecked():
             model['scale'] = round(float(self.scaleEdit.text()), 1)

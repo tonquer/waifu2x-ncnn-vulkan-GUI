@@ -1,0 +1,171 @@
+name: release
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      PACKAGE_PREFIX: ${{ steps.get-package_prefix.outputs.PACKAGE_PREFIX }}
+      TAG_NAME: ${{ steps.get-package_prefix.outputs.TAG_NAME }}
+      HEAD_SHA_SHORT: ${{ steps.get-package_prefix.outputs.HEAD_SHA_SHORT }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: get-package_prefix
+        id: get-package_prefix
+        run: |
+          LIB_NAME=waifu2x-demo
+          TAG_NAME=$(git describe --abbrev=0 --tags)
+          HEAD_SHA_SHORT=$(git rev-parse --short HEAD)
+          echo "::set-output name=PACKAGE_PREFIX::${LIB_NAME}_${TAG_NAME}"
+          echo "::set-output name=TAG_NAME::${TAG_NAME}"
+          echo "::set-output name=HEAD_SHA_SHORT::${HEAD_SHA_SHORT}"
+
+  release:
+    needs: [setup]
+    runs-on: ubuntu-latest
+    outputs:
+      Up_Url: ${{ steps.create_release.outputs.upload_url }}
+    steps:
+      - name: create_release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ needs.setup.outputs.TAG_NAME }}
+          release_name: ${{ needs.setup.outputs.TAG_NAME }}
+          draft: true
+          prerelease: true
+
+  ubuntu:
+    needs: [setup, release]
+    runs-on: ubuntu-latest
+    env:
+      PACKAGENAME: ${{ needs.setup.outputs.PACKAGE_PREFIX }}_ubuntu_x64
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Build
+      run: |
+        pyinstaller -F -w start.py --add-binary waifu2x.so:.
+        mv dist waifu2x-demo
+        tar -zcvf ${{ env.PACKAGENAME }}.tar.gz waifu2x-demo/
+    - name: Upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ env.PACKAGENAME }}
+        path: ${{ env.PACKAGENAME }}.tar.gz
+    - name: upload-ubuntu
+      uses: actions/upload-release-asset@v1
+      if: startsWith(github.ref, 'refs/tags/v')
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ needs.release.outputs.Up_Url }}
+        asset_path: ${{ env.PACKAGENAME }}.tar.gz
+        asset_name: ${{ env.PACKAGENAME }}.tar.gz
+        asset_content_type: application/gzip
+
+  macos:
+    needs: [setup, release]
+    runs-on: macos-latest
+    env:
+      PACKAGENAME: ${{ needs.setup.outputs.PACKAGE_PREFIX }}_macos_x64
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller
+        pip install -r requirements.txt
+        brew install create-dmg
+    - name: Build
+      run: |
+        pyinstaller --clean --log-level TRACE --onedir --name Waifu2x-demo \
+            --hidden-import waifu2x_vulkan --hidden-import PySide6 \
+            --hidden-import conf --hidden-import --hidden-import src \
+            --hidden-import src.qt \
+            --hidden-import src.qt.com \
+            --hidden-import src.qt.menu \
+            --hidden-import src.qt.util\
+            --hidden-import src.util --hidden-import ui \
+            --strip --windowed -i Icon.icns \
+            start.py
+        rm -rf dist/Waifu2x-demo
+        cp Icon.icns dist/
+        ln -s /Applications/   dist/Applications
+        create-dmg --volname "Waifu2x-demo" --volicon "Icon.icns" --icon "Icon.icns" 200 190 \
+            --hide-extension "Icon.icns" ${{ env.PACKAGENAME }}.dmg dist/
+        zip -9 waifu2x-demo.zip ${{ env.PACKAGENAME }}.dmg
+    - name: Upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ env.PACKAGENAME }}
+        path: waifu2x-demo.zip
+    - name: upload-macos
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ needs.release.outputs.Up_Url }}
+        asset_path: ${{ env.PACKAGENAME }}.dmg
+        asset_name: ${{ env.PACKAGENAME }}.dmg
+        asset_content_type: application/gzip
+
+  windows:
+    needs: [setup, release]
+    runs-on: windows-latest
+    env:
+      PACKAGENAME: ${{ needs.setup.outputs.PACKAGE_PREFIX }}_windows_x64
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller
+        pip install -r requirements.txt
+    - name: Build
+      run: |
+        pyinstaller -F -i resources\icon.ico start.py
+        mv dist/start.exe "dist/start(debug).exe"
+        pyinstaller -F -w -i resources\icon.ico start.py
+        mv dist waifu2x-demo
+        cp LICENSE waifu2x-demo\
+        cp README.md waifu2x-demo\
+        # mkdir ${{ env.PACKAGENAME }}
+        # mv waifu2x-demo ${{ env.PACKAGENAME }}
+        7z a -r "$($Env:PACKAGENAME + '.zip')" "waifu2x-demo"
+    - name: Upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ env.PACKAGENAME }}
+        path: waifu2x-demo
+    - name: upload-macos
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ needs.release.outputs.Up_Url }}
+        asset_path: ${{ env.PACKAGENAME }}.zip
+        asset_name: ${{ env.PACKAGENAME }}.zip
+        asset_content_type: application/zip

@@ -1,9 +1,9 @@
 
 
-from PySide2 import QtWidgets, QtGui  # 导入PySide2部件
-from PySide2.QtCore import QTimer, QUrl
-from PySide2.QtGui import QIcon, QPixmap, QDesktopServices
-from PySide2.QtWidgets import QMessageBox
+from PySide6 import QtWidgets, QtGui  # 导入PySide6部件
+from PySide6.QtCore import QTimer, QUrl
+from PySide6.QtGui import QIcon, QPixmap, QDesktopServices, QGuiApplication
+from PySide6.QtWidgets import QMessageBox
 
 from conf import config
 from src.qt.com.qtbubblelabel import QtBubbleLabel
@@ -29,6 +29,9 @@ class QtMainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.resize(1000, 1000)
         self.menusetting.triggered.connect(self.OpenSetting)
         self.menuabout.triggered.connect(self.OpenAbout)
+        desktop = QGuiApplication.primaryScreen().geometry()
+        self.resize(desktop.width()//4*3, desktop.height()//4*3)
+        self.move(desktop.width()//8*1, desktop.height()//8*1)
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
         super().closeEvent(a0)
@@ -36,19 +39,20 @@ class QtMainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def Init(self):
         if config.CanWaifu2x:
-            import waifu2x
-            stat = waifu2x.init()
+            import waifu2x_vulkan
+            stat = waifu2x_vulkan.init()
             if stat < 0:
                 self.msgForm.ShowError("waifu2x初始化错误")
             else:
-                gpuInfo = waifu2x.getGpuInfo()
+                waifu2x_vulkan.setDebug(True)
+                gpuInfo = waifu2x_vulkan.getGpuInfo()
                 if gpuInfo:
                     self.settingForm.SetGpuInfos(gpuInfo)
                 if gpuInfo and config.Encode < 0:
                     config.Encode = 0
 
-                waifu2x.initSet(config.Encode, config.Waifu2xThread)
-                Log.Info("waifu2x初始化: " + str(stat) + " encode: " + str(config.Encode) + " version:" + waifu2x.getVersion())
+                waifu2x_vulkan.initSet(config.Encode, config.Waifu2xThread)
+                Log.Info("waifu2x初始化: " + str(stat) + " encode: " + str(config.Encode) + " version:" + waifu2x_vulkan.getVersion())
                 # self.msgForm.ShowMsg("waifu2x初始化成功\n" + waifu2x.getVersion())
         else:
             self.msgForm.ShowError("waifu2x无法启用, "+config.ErrorMsg)

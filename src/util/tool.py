@@ -216,9 +216,9 @@ class ToolUtil(object):
         # 条漫不放大
         if not config.CanWaifu2x:
             return {}
-        import waifu2x
+        import waifu2x_vulkan
         if max(w, h) >= 2561:
-            return {"model": waifu2x.MODEL_ANIME_STYLE_ART_RGB_NOISE3, "scale": 1, "index": 0}
+            return {"model": waifu2x_vulkan.MODEL_ANIME_STYLE_ART_RGB_NOISE3, "scale": 1, "index": 0}
         return ToolUtil.GetModelByIndex(config.DownloadModel)
 
     @staticmethod
@@ -323,16 +323,16 @@ class ToolUtil(object):
     def GetModelByIndex(index):
         if not config.CanWaifu2x:
             return {}
-        import waifu2x
+        import waifu2x_vulkan
         if index == 0:
-            return {"model": waifu2x.MODEL_CUNET_NO_SCALE_NOISE3, "scale": 1, "index": index}
+            return {"model": waifu2x_vulkan.MODEL_CUNET_NO_SCALE_NOISE3, "scale": 1, "index": index}
         elif index == 1:
-            return {"model": waifu2x.MODEL_CUNET_NOISE3, "scale": 2, "index": index}
+            return {"model": waifu2x_vulkan.MODEL_CUNET_NOISE3, "scale": 2, "index": index}
         elif index == 2:
-            return {"model": waifu2x.MODEL_PHOTO_NOISE3, "scale": 2, "index": index}
+            return {"model": waifu2x_vulkan.MODEL_PHOTO_NOISE3, "scale": 2, "index": index}
         elif index == 3:
-            return {"model": waifu2x.MODEL_ANIME_STYLE_ART_RGB_NOISE3, "scale": 2, "index": index}
-        return {"model": waifu2x.MODEL_CUNET_NOISE3, "scale": 2, "index": index}
+            return {"model": waifu2x_vulkan.MODEL_ANIME_STYLE_ART_RGB_NOISE3, "scale": 2, "index": index}
+        return {"model": waifu2x_vulkan.MODEL_CUNET_NOISE3, "scale": 2, "index": index}
 
     @staticmethod
     def GetCanSaveName(name):

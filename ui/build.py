@@ -6,8 +6,8 @@ for root, dirs, filenames in os.walk("./"):
         if name[-2:] != "ui":
             continue
         outName = name[:-3]
-        sts = os.system("pyside2-uic.exe {}.ui -o {}.py".format(outName, outName))
-        # proc = subprocess.Popen(["pyside2-uic.exe {}.ui -o {}.py".format(outName, outName)], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        sts = os.system("PySide6-uic.exe {}.ui -o {}.py".format(outName, outName))
+        # proc = subprocess.Popen(["PySide6-uic.exe {}.ui -o {}.py".format(outName, outName)], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         # while True:
         #     buff = proc.stdout.readline()
         #     buff = buff.decode("gbk", "ignore")

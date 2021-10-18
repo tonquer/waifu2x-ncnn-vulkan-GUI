@@ -3,15 +3,20 @@
 ################################################################################
 ## Form generated from reading UI file 'about.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.2
+## Created by: Qt User Interface Compiler version 6.2.0
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
-from PySide2.QtWidgets import *
-
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
+    QFont, QFontDatabase, QGradient, QIcon,
+    QImage, QKeySequence, QLinearGradient, QPainter,
+    QPalette, QPixmap, QRadialGradient, QTransform)
+from PySide6.QtWidgets import (QApplication, QFrame, QGridLayout, QLabel,
+    QSizePolicy, QWidget)
 
 class Ui_AboutForm(object):
     def setupUi(self, AboutForm):
@@ -129,7 +134,7 @@ class Ui_AboutForm(object):
 
     def retranslateUi(self, AboutForm):
         AboutForm.setWindowTitle(QCoreApplication.translate("AboutForm", u"Form", None))
-        self.label_8.setText(QCoreApplication.translate("AboutForm", u"<a href=\"https://github.com/tonquer/waifu2x-ncnn-vulkan-python\"> waifu2x-ncnn-vulkan-python</a>", None))
+        self.label_8.setText(QCoreApplication.translate("AboutForm", u"<a href=\"https://github.com/tonquer/waifu2x-vulkan\"> waifu2x-vulkan</a>", None))
         self.label.setText(QCoreApplication.translate("AboutForm", u"waifu2x-GUI-demo v1.0.1", None))
         self.label_2.setText("")
         self.label_4.setText(QCoreApplication.translate("AboutForm", u"\u9879\u76ee\u5f00\u6e90\u5730\u5740\uff1a", None))
