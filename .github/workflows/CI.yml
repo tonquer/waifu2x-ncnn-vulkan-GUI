@@ -56,13 +56,16 @@ jobs:
     - name: Build
       run: |
         pyinstaller --clean --log-level TRACE --onedir --name Waifu2x-demo \
-            --hidden-import waifu2x_vulkan --hidden-import PySide6 \
-            --hidden-import conf --hidden-import --hidden-import src \
+            --hidden-import waifu2x_vulkan \
+            --hidden-import PySide6 \
+            --hidden-import conf \
+            --hidden-import src \
             --hidden-import src.qt \
             --hidden-import src.qt.com \
             --hidden-import src.qt.menu \
             --hidden-import src.qt.util\
-            --hidden-import src.util --hidden-import ui \
+            --hidden-import src.util \
+            --hidden-import ui \
             --strip --windowed -i Icon.icns \
             start.py
         rm -rf dist/Waifu2x-demo

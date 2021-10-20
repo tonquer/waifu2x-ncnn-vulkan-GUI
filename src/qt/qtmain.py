@@ -42,18 +42,17 @@ class QtMainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             import waifu2x_vulkan
             stat = waifu2x_vulkan.init()
             if stat < 0:
-                self.msgForm.ShowError("waifu2x初始化错误")
-            else:
-                waifu2x_vulkan.setDebug(True)
-                gpuInfo = waifu2x_vulkan.getGpuInfo()
-                if gpuInfo:
-                    self.settingForm.SetGpuInfos(gpuInfo)
-                if gpuInfo and config.Encode < 0:
-                    config.Encode = 0
+                self.msgForm.ShowError("Waifu2x当前为CPU模式")
+            waifu2x_vulkan.setDebug(True)
+            gpuInfo = waifu2x_vulkan.getGpuInfo()
+            
+            self.settingForm.SetGpuInfos(gpuInfo)
+            if (gpuInfo and config.Encode < 0) or ( config.Encode >= len(gpuInfo)):
+                config.Encode = 0
 
-                waifu2x_vulkan.initSet(config.Encode, config.Waifu2xThread)
-                Log.Info("waifu2x初始化: " + str(stat) + " encode: " + str(config.Encode) + " version:" + waifu2x_vulkan.getVersion())
-                # self.msgForm.ShowMsg("waifu2x初始化成功\n" + waifu2x.getVersion())
+            waifu2x_vulkan.initSet(config.Encode, config.Waifu2xThread)
+            Log.Info("waifu2x初始化: " + str(stat) + " encode: " + str(config.Encode) + " version:" + waifu2x_vulkan.getVersion())
+            # self.msgForm.ShowMsg("waifu2x初始化成功\n" + waifu2x.getVersion())
         else:
             self.msgForm.ShowError("waifu2x无法启用, "+config.ErrorMsg)
             self.img.checkBox.setEnabled(False)
