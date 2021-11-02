@@ -71,7 +71,6 @@ jobs:
             --strip --windowed \
             start.py
         rm -rf dist/Waifu2x-demo
-        cp Icon.icns dist/
         ln -s /Applications/   dist/Applications
         rm -rf dist/Waifu2x-demo.app/Contents/MacOS/resources/*.py
         rm -rf dist/Waifu2x-demo.app/Contents/MacOS/translations/*.ts

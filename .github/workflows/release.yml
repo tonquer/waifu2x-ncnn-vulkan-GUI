@@ -111,7 +111,6 @@ jobs:
             --strip --windowed \
             start.py
         rm -rf dist/Waifu2x-demo
-        cp Icon.icns dist/
         ln -s /Applications/   dist/Applications
         create-dmg --volname "Waifu2x-demo" \
             ${{ env.PACKAGENAME }}.dmg dist/
