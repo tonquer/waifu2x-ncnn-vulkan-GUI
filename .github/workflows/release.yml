@@ -59,7 +59,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Build
       run: |
-        pyinstaller -F -w start.py --add-binary waifu2x.so:.
+        pyinstaller -F -w start.py
         mv dist waifu2x-demo
         tar -zcvf ${{ env.PACKAGENAME }}.tar.gz waifu2x-demo/
     - name: Upload
@@ -97,7 +97,7 @@ jobs:
         brew install create-dmg
     - name: Build
       run: |
-        pyinstaller --clean --log-level TRACE --onedir --name Waifu2x-demo \
+        pyinstaller --clean --onedir --name Waifu2x-demo \
             --hidden-import waifu2x_vulkan \
             --hidden-import PySide6 \
             --hidden-import conf \
@@ -108,13 +108,13 @@ jobs:
             --hidden-import src.qt.util\
             --hidden-import src.util \
             --hidden-import ui \
-            --strip --windowed -i Icon.icns \
+            --strip --windowed \
             start.py
         rm -rf dist/Waifu2x-demo
         cp Icon.icns dist/
         ln -s /Applications/   dist/Applications
-        create-dmg --volname "Waifu2x-demo" --volicon "Icon.icns" --icon "Icon.icns" 200 190 \
-            --hide-extension "Icon.icns" ${{ env.PACKAGENAME }}.dmg dist/
+        create-dmg --volname "Waifu2x-demo" \
+            ${{ env.PACKAGENAME }}.dmg dist/
         zip -9 waifu2x-demo.zip ${{ env.PACKAGENAME }}.dmg
     - name: Upload
       uses: actions/upload-artifact@v2
@@ -149,9 +149,9 @@ jobs:
         pip install -r requirements.txt
     - name: Build
       run: |
-        pyinstaller -F -i resources\icon.ico start.py
+        pyinstaller -F start.py
         mv dist/start.exe "dist/start(debug).exe"
-        pyinstaller -F -w -i resources\icon.ico start.py
+        pyinstaller -F -w start.py
         mv dist waifu2x-demo
         cp LICENSE waifu2x-demo\
         cp README.md waifu2x-demo\

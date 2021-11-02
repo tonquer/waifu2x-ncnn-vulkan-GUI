@@ -219,7 +219,7 @@ class QtImg(QtWidgets.QWidget, Ui_Img):
             return False
         if not config.CanWaifu2x:
             return False
-        import waifu2x_vulkan
+        from waifu2x_vulkan import waifu2x_vulkan
         self.SetStatus(False)
         self.index = self.comboBox.currentIndex()
         index = self.comboBox.currentIndex()

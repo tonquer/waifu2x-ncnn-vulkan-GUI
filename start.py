@@ -6,7 +6,7 @@ from PySide6.QtGui import QGuiApplication, Qt
 
 from conf import config
 try:
-    import waifu2x_vulkan
+    from waifu2x_vulkan import waifu2x_vulkan
     config.CanWaifu2x = True
 except Exception as es:
     config.CanWaifu2x = False
@@ -27,7 +27,7 @@ if __name__ == "__main__":
 
     main.show()  # 显示窗体
     main.Init()
-    sts = app.exec_()
+    sts = app.exec()
     if config.CanWaifu2x:
         waifu2x_vulkan.stop()
     sys.exit(sts)  # 运行程序

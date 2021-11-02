@@ -23,6 +23,8 @@ class QtMainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setWindowTitle("waifu2x-gui")
         self.msgForm = QtBubbleLabel(self)
         self.settingForm = QtSetting(self)
+        self.settingForm.LoadSetting()
+
         self.aboutForm = QtAbout(self)
         self.img = QtImg()
         self.stackedWidget.addWidget(self.img)
@@ -39,18 +41,18 @@ class QtMainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def Init(self):
         if config.CanWaifu2x:
-            import waifu2x_vulkan
+            from waifu2x_vulkan import waifu2x_vulkan
             stat = waifu2x_vulkan.init()
             if stat < 0:
                 self.msgForm.ShowError("Waifu2x当前为CPU模式")
             waifu2x_vulkan.setDebug(True)
-            gpuInfo = waifu2x_vulkan.getGpuInfo()
             
+            gpuInfo = waifu2x_vulkan.getGpuInfo()
             self.settingForm.SetGpuInfos(gpuInfo)
-            if (gpuInfo and config.Encode < 0) or ( config.Encode >= len(gpuInfo)):
-                config.Encode = 0
 
             waifu2x_vulkan.initSet(config.Encode, config.Waifu2xThread)
+
+            self.img.gpuName.setText(config.EncodeGpu)
             Log.Info("waifu2x初始化: " + str(stat) + " encode: " + str(config.Encode) + " version:" + waifu2x_vulkan.getVersion())
             # self.msgForm.ShowMsg("waifu2x初始化成功\n" + waifu2x.getVersion())
         else:

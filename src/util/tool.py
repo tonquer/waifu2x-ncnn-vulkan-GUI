@@ -216,7 +216,7 @@ class ToolUtil(object):
         # 条漫不放大
         if not config.CanWaifu2x:
             return {}
-        import waifu2x_vulkan
+        from waifu2x_vulkan import waifu2x_vulkan
         if max(w, h) >= 2561:
             return {"model": waifu2x_vulkan.MODEL_ANIME_STYLE_ART_RGB_NOISE3, "scale": 1, "index": 0}
         return ToolUtil.GetModelByIndex(config.DownloadModel)
@@ -323,7 +323,7 @@ class ToolUtil(object):
     def GetModelByIndex(index):
         if not config.CanWaifu2x:
             return {}
-        import waifu2x_vulkan
+        from waifu2x_vulkan import waifu2x_vulkan
         if index == 0:
             return {"model": waifu2x_vulkan.MODEL_CUNET_NO_SCALE_NOISE3, "scale": 1, "index": index}
         elif index == 1:

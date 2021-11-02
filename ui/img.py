@@ -243,6 +243,23 @@ class Ui_Img(object):
 
         self.verticalLayout_3.addLayout(self.horizontalLayout_9)
 
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.label = QLabel(Img)
+        self.label.setObjectName(u"label")
+        self.label.setMaximumSize(QSize(60, 16777215))
+
+        self.horizontalLayout.addWidget(self.label)
+
+        self.gpuName = QLabel(Img)
+        self.gpuName.setObjectName(u"gpuName")
+        self.gpuName.setMaximumSize(QSize(160, 16777215))
+
+        self.horizontalLayout.addWidget(self.gpuName)
+
+
+        self.verticalLayout_3.addLayout(self.horizontalLayout)
+
         self.horizontalLayout_10 = QHBoxLayout()
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
         self.label_6 = QLabel(Img)
@@ -365,6 +382,8 @@ class Ui_Img(object):
         self.resolutionLabel.setText(QCoreApplication.translate("Img", u"TextLabel", None))
         self.label_10.setText(QCoreApplication.translate("Img", u"\u5927 \u5c0f\uff1a", None))
         self.sizeLabel.setText(QCoreApplication.translate("Img", u"TextLabel", None))
+        self.label.setText(QCoreApplication.translate("Img", u"GPU:", None))
+        self.gpuName.setText(QCoreApplication.translate("Img", u"TextLabel", None))
         self.label_6.setText(QCoreApplication.translate("Img", u"\u8017\u65f6\uff1a", None))
         self.tickLabel.setText("")
         self.oepnButton.setText(QCoreApplication.translate("Img", u"\u6253\u5f00\u56fe\u7247", None))

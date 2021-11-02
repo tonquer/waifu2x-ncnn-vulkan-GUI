@@ -128,7 +128,7 @@ class QtTask(Singleton, threading.Thread):
     def LoadData(self):
         if not config.CanWaifu2x:
             return None
-        import waifu2x_vulkan
+        from waifu2x_vulkan import waifu2x_vulkan
         return waifu2x_vulkan.load(0)
 
     def RunLoad(self):
@@ -139,10 +139,14 @@ class QtTask(Singleton, threading.Thread):
                     continue
                 task = self.convertLoad.get(taskId)
                 if config.CanWaifu2x:
-                    import waifu2x_vulkan
+                    from waifu2x_vulkan import waifu2x_vulkan
+                    if config.EncodeGpu != "CPU":
+                        tileSize = 0
+                    else:
+                        tileSize = 200
                     sts = waifu2x_vulkan.add(task.imgData, task.model.get('model', 0), task.downloadId,
                                       format=task.model.get("format", "jpg"), width=task.model.get("width", 0),
-                                      high=task.model.get("high", 0), scale=task.model.get("scale", 0))
+                                      high=task.model.get("high", 0), scale=task.model.get("scale", 0), tileSize=tileSize)
 
                     # Log.Warn("add convert info, taskId: {}, model:{}, sts:{}".format(str(task.taskId), task.model,
                     #                                                                          str(sts)))
@@ -188,5 +192,5 @@ class QtTask(Singleton, threading.Thread):
         Log.Info("cancel convert taskId, {}".format(taskIds))
         self.convertFlag.pop(cleanFlag)
         if config.CanWaifu2x:
-            import waifu2x_vulkan
+            from waifu2x_vulkan import waifu2x_vulkan
             waifu2x_vulkan.remove(list(taskIds))
