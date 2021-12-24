@@ -165,7 +165,7 @@ class QtTask(Singleton, threading.Thread):
         while True:
             info = self.LoadData()
             if not info:
-                continue
+                break
             t1 = CTime()
             data, convertId, taskId, tick = info
             if taskId not in self.convertLoad:
