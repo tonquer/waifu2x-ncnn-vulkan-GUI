@@ -67,7 +67,7 @@ class QtImg(QtWidgets.QWidget, Ui_Img):
         self.graphicsView.installEventFilter(self)
         self.graphicsView.setWindowFlag(Qt.FramelessWindowHint)
         # tta有BUG，暂时屏蔽 TODO
-        self.ttaModel.setEnabled(False)
+        # self.ttaModel.setEnabled(False)
         self.data = b""
         self.waifu2xData = b""
 
