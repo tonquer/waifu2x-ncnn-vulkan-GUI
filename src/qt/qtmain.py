@@ -44,19 +44,19 @@ class QtMainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             from waifu2x_vulkan import waifu2x_vulkan
             stat = waifu2x_vulkan.init()
             if stat < 0:
-                self.msgForm.ShowError("Waifu2x当前为CPU模式")
+                self.msgForm.ShowError("Waifu2x CPU Model")
             waifu2x_vulkan.setDebug(True)
             
             gpuInfo = waifu2x_vulkan.getGpuInfo()
             self.settingForm.SetGpuInfos(gpuInfo)
 
-            waifu2x_vulkan.initSet(config.Encode, config.Waifu2xThread)
+            waifu2x_vulkan.initSet(config.Encode)
 
             self.img.gpuName.setText(config.EncodeGpu)
-            Log.Info("waifu2x初始化: " + str(stat) + " encode: " + str(config.Encode) + " version:" + waifu2x_vulkan.getVersion())
+            Log.Info("waifu2x init: " + str(stat) + " encode: " + str(config.Encode) + " version:" + waifu2x_vulkan.getVersion())
             # self.msgForm.ShowMsg("waifu2x初始化成功\n" + waifu2x.getVersion())
         else:
-            self.msgForm.ShowError("waifu2x无法启用, "+config.ErrorMsg)
+            self.msgForm.ShowError("Waifu2x can not use, "+config.ErrorMsg)
             self.img.checkBox.setEnabled(False)
             self.img.changeJpg.setEnabled(False)
             self.img.changePng.setEnabled(False)

@@ -144,9 +144,12 @@ class QtTask(Singleton, threading.Thread):
                         tileSize = 0
                     else:
                         tileSize = 200
-                    sts = waifu2x_vulkan.add(task.imgData, task.model.get('model', 0), task.downloadId,
-                                      format=task.model.get("format", "jpg"), width=task.model.get("width", 0),
-                                      high=task.model.get("high", 0), scale=task.model.get("scale", 0), tileSize=tileSize)
+                    scale = task.model.get("scale", 0)
+                    if scale <= 0:
+                        sts = waifu2x_vulkan.add(task.imgData, task.model.get('model', 0), task.downloadId, task.model.get("width", 0),
+                                          task.model.get("high", 0), task.model.get("format", "jpg"), tileSize)
+                    else:
+                        sts = waifu2x_vulkan.add(task.imgData, task.model.get('model', 0), task.downloadId, scale, task.model.get("format", "jpg"), tileSize)
 
                     # Log.Warn("add convert info, taskId: {}, model:{}, sts:{}".format(str(task.taskId), task.model,
                     #                                                                          str(sts)))
