@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>设置</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
@@ -26,55 +26,60 @@
      <item row="0" column="0">
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="1" column="0">
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>解码器（需重启）</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
         <widget class="QLabel" name="label_8">
          <property name="text">
-          <string>线程数</string>
+          <string>CPU数量（CPU模式可用）</string>
          </property>
         </widget>
        </item>
        <item row="0" column="2">
-        <widget class="QComboBox" name="logBox">
-         <item>
-          <property name="text">
-           <string>WARN</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>INFO</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>DEBUG</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="1" column="2">
         <widget class="QComboBox" name="encodeSelect"/>
        </item>
-       <item row="2" column="2">
+       <item row="1" column="2">
         <widget class="QComboBox" name="threadSelect">
          <item>
           <property name="text">
-           <string>2</string>
+           <string>Auto</string>
           </property>
          </item>
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="QLabel" name="label_10">
+        <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>日志等级</string>
+          <string>CPU/GPU</string>
          </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Language</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QComboBox" name="languageSelect">
+         <item>
+          <property name="text">
+           <string>Auto</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>中文简体</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>中文繁体</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>English</string>
+          </property>
+         </item>
         </widget>
        </item>
       </layout>
@@ -122,7 +127,4 @@
   <slot>SaveSetting()</slot>
   <slot>SelectSavePath()</slot>
  </slots>
- <buttongroups>
-  <buttongroup name="buttonGroup"/>
- </buttongroups>
 </ui>

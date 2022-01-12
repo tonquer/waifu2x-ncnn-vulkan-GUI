@@ -13,7 +13,7 @@ class QtAbout(QtWidgets.QWidget, Ui_AboutForm):
         super(self.__class__, self).__init__()
         Ui_AboutForm.__init__(self)
         self.setupUi(self)
-        self.setWindowTitle("关于")
+        self.setWindowTitle("about")
         self.owner = weakref.ref(owner)
         self.label_3.linkActivated.connect(self.OpenUrl)
         self.label_8.linkActivated.connect(self.OpenUrl2)

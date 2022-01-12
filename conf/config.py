@@ -4,7 +4,8 @@ IsLoadingPicture = True
 
 UpdateUrl = "https://github.com/tonquer/waifu2x-ncnn-vulkan-GUI/releases/latest"
 UpdateUrl2 = "https://github.com/tonquer/waifu2x-ncnn-vulkan-GUI/releases"
-UpdateVersion = "v1.0.1"
+UpdateVersion = "v1.0.2"
+Language = 0
 
 # waifu2x
 CanWaifu2x = True
@@ -12,6 +13,7 @@ ErrorMsg = ""
 
 Encode = 0
 EncodeGpu = ""
+UseCpuNum = 0
 SelectEncodeGpu = ""
 
 Waifu2xThread = 2

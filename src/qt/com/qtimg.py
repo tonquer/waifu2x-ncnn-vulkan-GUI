@@ -21,7 +21,7 @@ class QtImg(QtWidgets.QWidget, Ui_Img):
         self.bookId = ""
         self.epsId = 0
         self.curIndex = 0
-        self.setWindowTitle("图片查看")
+        self.setWindowTitle("IMG")
         self.setWindowModality(QtCore.Qt.ApplicationModal)
         self.resize(800, 900)
         self.checkBox.setChecked(True)
@@ -57,7 +57,7 @@ class QtImg(QtWidgets.QWidget, Ui_Img):
         self.graphicsView.setScene(self.graphicsScene)
         self.graphicsScene.addItem(self.graphicsItem)
         self.graphicsView.setMinimumSize(10, 10)
-        self.pixMap = QPixmap("加载中")
+        self.pixMap = QPixmap("Loading")
         self.graphicsItem.setPixmap(self.pixMap)
         # self.radioButton.setChecked(True)
         self.isStripModel = False
@@ -175,7 +175,7 @@ class QtImg(QtWidgets.QWidget, Ui_Img):
     def CopyPicture(self):
         clipboard = QApplication.clipboard()
         clipboard.setPixmap(self.pixMap)
-        QtBubbleLabel.ShowMsgEx(self, "复制成功")
+        QtBubbleLabel.ShowMsgEx(self, "Copy Success")
         return
 
     def ReduceScalePic(self):
@@ -255,7 +255,7 @@ class QtImg(QtWidgets.QWidget, Ui_Img):
         self.backStatus = self.GetStatus()
         QtTask().AddConvertTask(self.data, model, self.AddConvertBack,
                                 cleanFlag="QtImg")
-        self.changeLabel.setText("正在转换")
+        self.changeLabel.setText(self.tr("正在转换"))
         return True
 
     def AddConvertBack(self, data, waifuId, backParam, tick):
@@ -263,11 +263,11 @@ class QtImg(QtWidgets.QWidget, Ui_Img):
             self.waifu2xData = data
             if self.checkBox.isChecked():
                 self._ShowImg(data)
-            self.changeLabel.setText("已转换")
+            self.changeLabel.setText(self.tr("已转换"))
             self.tickLabel.setText(str(round(tick, 3)) + "s")
 
         else:
-            self.changeLabel.setText("失败")
+            self.changeLabel.setText(self.tr("失败"))
         self.SetStatus(True)
         return
 
@@ -289,7 +289,7 @@ class QtImg(QtWidgets.QWidget, Ui_Img):
         try:
             today = time.strftime("%Y%m%d%H%M%S", time.localtime(time.time()))
             picFormat = self.format if self.format else "jpg"
-            filepath = QFileDialog.getSaveFileName(self, "保存", "{}.{}".format(today, picFormat))
+            filepath = QFileDialog.getSaveFileName(self, "Save", "{}.{}".format(today, picFormat))
             if filepath and len(filepath) >= 1 and filepath[0]:
                 name = filepath[0]
                 f = open(name, "wb")

@@ -10,8 +10,6 @@ from src.util import Log
 from conf import config
 
 
-
-
 class CTime(object):
     def __init__(self):
         self._t1 = time.time()
@@ -22,7 +20,6 @@ class CTime(object):
         if diff >= checkTime:
             text = 'CTime2 consume:{} ms, {}.{}'.format(diff, clsName, des)
             Log.Warn(text)
-            # 超过0.5秒超时写入数据库
         self._t1 = t2
         return diff
 

@@ -16,17 +16,19 @@ except Exception as es:
 from PySide6 import QtWidgets  # 导入PySide6部件
 from src.qt.qtmain import QtMainWindow
 from src.util import Log
+import images_rc
+
 
 if __name__ == "__main__":
-    QGuiApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.Floor)
+    # QGuiApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.Floor)
     # QtWidgets.QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
     Log.Init()
     app = QtWidgets.QApplication(sys.argv)  # 建立application对象
     # app.addLibraryPath("./resources")
     main = QtMainWindow()
 
+    main.Init(app)
     main.show()  # 显示窗体
-    main.Init()
     sts = app.exec()
     if config.CanWaifu2x:
         waifu2x_vulkan.stop()

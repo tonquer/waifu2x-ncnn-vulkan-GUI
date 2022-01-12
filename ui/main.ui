@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Waifu2x-GUI</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_4">
@@ -40,22 +40,15 @@
      <x>0</x>
      <y>0</y>
      <width>353</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menusetting">
-    <property name="title">
-     <string>设置</string>
-    </property>
-    <addaction name="actionsetting"/>
-   </widget>
    <widget class="QMenu" name="menuabout">
     <property name="title">
      <string>工具</string>
     </property>
     <addaction name="actionabout"/>
    </widget>
-   <addaction name="menusetting"/>
    <addaction name="menuabout"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

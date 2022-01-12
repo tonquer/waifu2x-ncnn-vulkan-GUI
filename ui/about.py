@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'about.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.2.0
+## Created by: Qt User Interface Compiler version 6.2.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -139,7 +139,7 @@ class Ui_AboutForm(object):
         self.label_2.setText("")
         self.label_4.setText(QCoreApplication.translate("AboutForm", u"\u9879\u76ee\u5f00\u6e90\u5730\u5740\uff1a", None))
         self.label_7.setText(QCoreApplication.translate("AboutForm", u"waifu2x\u5730\u5740", None))
-        self.label_6.setText(QCoreApplication.translate("AboutForm", u"1.0.1", None))
+        self.label_6.setText(QCoreApplication.translate("AboutForm", u"1.1.1", None))
         self.label_5.setText(QCoreApplication.translate("AboutForm", u"waifu2x\u7248\u672c\uff1a", None))
         self.label_3.setText(QCoreApplication.translate("AboutForm", u"<a href=\"https://github.com/tonquer/waifu2x-ncnn-vulkan--GUI\"> waifu2x-ncnn-vulkan-GUI</a>", None))
     # retranslateUi

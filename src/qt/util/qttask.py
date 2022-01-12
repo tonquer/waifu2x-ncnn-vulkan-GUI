@@ -9,8 +9,7 @@ from PySide6.QtCore import Signal, QObject
 
 from conf import config
 from src.util import Singleton, Log
-from src.util.status import Status
-from src.util.tool import time_me, CTime, ToolUtil
+from src.util.tool import CTime, ToolUtil
 
 
 class QtTaskQObject(QObject):
@@ -140,16 +139,12 @@ class QtTask(Singleton, threading.Thread):
                 task = self.convertLoad.get(taskId)
                 if config.CanWaifu2x:
                     from waifu2x_vulkan import waifu2x_vulkan
-                    if config.EncodeGpu != "CPU":
-                        tileSize = 0
-                    else:
-                        tileSize = 200
                     scale = task.model.get("scale", 0)
                     if scale <= 0:
                         sts = waifu2x_vulkan.add(task.imgData, task.model.get('model', 0), task.downloadId, task.model.get("width", 0),
-                                          task.model.get("high", 0), task.model.get("format", "jpg"), tileSize)
+                                          task.model.get("high", 0), task.model.get("format", "jpg"))
                     else:
-                        sts = waifu2x_vulkan.add(task.imgData, task.model.get('model', 0), task.downloadId, scale, task.model.get("format", "jpg"), tileSize)
+                        sts = waifu2x_vulkan.add(task.imgData, task.model.get('model', 0), task.downloadId, scale, task.model.get("format", "jpg"))
 
                     # Log.Warn("add convert info, taskId: {}, model:{}, sts:{}".format(str(task.taskId), task.model,
                     #                                                                          str(sts)))

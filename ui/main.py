@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'main.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.2.0
+## Created by: Qt User Interface Compiler version 6.2.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -49,9 +49,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 353, 23))
-        self.menusetting = QMenu(self.menubar)
-        self.menusetting.setObjectName(u"menusetting")
+        self.menubar.setGeometry(QRect(0, 0, 353, 22))
         self.menuabout = QMenu(self.menubar)
         self.menuabout.setObjectName(u"menuabout")
         MainWindow.setMenuBar(self.menubar)
@@ -59,9 +57,7 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
-        self.menubar.addAction(self.menusetting.menuAction())
         self.menubar.addAction(self.menuabout.menuAction())
-        self.menusetting.addAction(self.actionsetting)
         self.menuabout.addAction(self.actionabout)
 
         self.retranslateUi(MainWindow)
@@ -73,11 +69,10 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Waifu2x-GUI", None))
         self.actionsetting.setText(QCoreApplication.translate("MainWindow", u"setting", None))
         self.actionabout.setText(QCoreApplication.translate("MainWindow", u"about", None))
         self.actionimg_convert.setText(QCoreApplication.translate("MainWindow", u"img convert", None))
-        self.menusetting.setTitle(QCoreApplication.translate("MainWindow", u"\u8bbe\u7f6e", None))
         self.menuabout.setTitle(QCoreApplication.translate("MainWindow", u"\u5de5\u5177", None))
     # retranslateUi
 

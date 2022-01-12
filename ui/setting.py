@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'setting.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.2.0
+## Created by: Qt User Interface Compiler version 6.2.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -15,9 +15,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QAbstractButton, QApplication, QButtonGroup, QComboBox,
-    QDialogButtonBox, QGridLayout, QLabel, QSizePolicy,
-    QWidget)
+from PySide6.QtWidgets import (QAbstractButton, QApplication, QComboBox, QDialogButtonBox,
+    QGridLayout, QLabel, QSizePolicy, QWidget)
 
 class Ui_Setting(object):
     def setupUi(self, Setting):
@@ -36,39 +35,40 @@ class Ui_Setting(object):
 
         self.gridLayout_3 = QGridLayout()
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.label_3 = QLabel(Setting)
-        self.label_3.setObjectName(u"label_3")
-
-        self.gridLayout_3.addWidget(self.label_3, 1, 0, 1, 1)
-
         self.label_8 = QLabel(Setting)
         self.label_8.setObjectName(u"label_8")
 
-        self.gridLayout_3.addWidget(self.label_8, 2, 0, 1, 1)
-
-        self.logBox = QComboBox(Setting)
-        self.logBox.addItem("")
-        self.logBox.addItem("")
-        self.logBox.addItem("")
-        self.logBox.setObjectName(u"logBox")
-
-        self.gridLayout_3.addWidget(self.logBox, 0, 2, 1, 1)
+        self.gridLayout_3.addWidget(self.label_8, 1, 0, 1, 1)
 
         self.encodeSelect = QComboBox(Setting)
         self.encodeSelect.setObjectName(u"encodeSelect")
 
-        self.gridLayout_3.addWidget(self.encodeSelect, 1, 2, 1, 1)
+        self.gridLayout_3.addWidget(self.encodeSelect, 0, 2, 1, 1)
 
         self.threadSelect = QComboBox(Setting)
         self.threadSelect.addItem("")
         self.threadSelect.setObjectName(u"threadSelect")
 
-        self.gridLayout_3.addWidget(self.threadSelect, 2, 2, 1, 1)
+        self.gridLayout_3.addWidget(self.threadSelect, 1, 2, 1, 1)
 
-        self.label_10 = QLabel(Setting)
-        self.label_10.setObjectName(u"label_10")
+        self.label_3 = QLabel(Setting)
+        self.label_3.setObjectName(u"label_3")
 
-        self.gridLayout_3.addWidget(self.label_10, 0, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.label_3, 0, 0, 1, 1)
+
+        self.label = QLabel(Setting)
+        self.label.setObjectName(u"label")
+
+        self.gridLayout_3.addWidget(self.label, 2, 0, 1, 1)
+
+        self.languageSelect = QComboBox(Setting)
+        self.languageSelect.addItem("")
+        self.languageSelect.addItem("")
+        self.languageSelect.addItem("")
+        self.languageSelect.addItem("")
+        self.languageSelect.setObjectName(u"languageSelect")
+
+        self.gridLayout_3.addWidget(self.languageSelect, 2, 2, 1, 1)
 
 
         self.gridLayout.addLayout(self.gridLayout_3, 0, 0, 1, 1)
@@ -85,15 +85,16 @@ class Ui_Setting(object):
     # setupUi
 
     def retranslateUi(self, Setting):
-        Setting.setWindowTitle(QCoreApplication.translate("Setting", u"Form", None))
-        self.label_3.setText(QCoreApplication.translate("Setting", u"\u89e3\u7801\u5668\uff08\u9700\u91cd\u542f\uff09", None))
-        self.label_8.setText(QCoreApplication.translate("Setting", u"\u7ebf\u7a0b\u6570", None))
-        self.logBox.setItemText(0, QCoreApplication.translate("Setting", u"WARN", None))
-        self.logBox.setItemText(1, QCoreApplication.translate("Setting", u"INFO", None))
-        self.logBox.setItemText(2, QCoreApplication.translate("Setting", u"DEBUG", None))
+        Setting.setWindowTitle(QCoreApplication.translate("Setting", u"\u8bbe\u7f6e", None))
+        self.label_8.setText(QCoreApplication.translate("Setting", u"CPU\u6570\u91cf\uff08CPU\u6a21\u5f0f\u53ef\u7528\uff09", None))
+        self.threadSelect.setItemText(0, QCoreApplication.translate("Setting", u"Auto", None))
 
-        self.threadSelect.setItemText(0, QCoreApplication.translate("Setting", u"2", None))
+        self.label_3.setText(QCoreApplication.translate("Setting", u"CPU/GPU", None))
+        self.label.setText(QCoreApplication.translate("Setting", u"Language", None))
+        self.languageSelect.setItemText(0, QCoreApplication.translate("Setting", u"Auto", None))
+        self.languageSelect.setItemText(1, QCoreApplication.translate("Setting", u"\u4e2d\u6587\u7b80\u4f53", None))
+        self.languageSelect.setItemText(2, QCoreApplication.translate("Setting", u"\u4e2d\u6587\u7e41\u4f53", None))
+        self.languageSelect.setItemText(3, QCoreApplication.translate("Setting", u"English", None))
 
-        self.label_10.setText(QCoreApplication.translate("Setting", u"\u65e5\u5fd7\u7b49\u7ea7", None))
     # retranslateUi
 
