@@ -196,6 +196,8 @@ class QtImg(QtWidgets.QWidget, Ui_Img):
                     data = f.read()
                     f.close()
                     self.ShowImg(data)
+                    self.changeJpg.setEnabled(True)
+                    self.changePng.setEnabled(True)
         except Exception as ex:
             Log.Error(ex)
         return
